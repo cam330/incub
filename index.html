@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>Incubee</title>
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="/app/styles.css">
+<!-- endinject -->
+</head>
+
+<body ng-controller="InvestorController as vm">
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<h1>Incubee</h1>
+
+
+<button ng-click="vm.getCustomers()">Get all customers</button>
+<!-- 
+<div>
+	<div class="row">
+		<div class="col-sm-2" id="incubeeDisplay" ng-repeat="customers in vm.customersArray">
+			<label>{{customers.company_name}}</label>
+		</div>
+	</div>
+</div> -->
+
+
+<div class="row">
+	<ul id="incubeesDiv" ng-repeat="customers in vm.customersArray">
+		<div id="incubeeDisplayDiv" class="col-sm-3">
+			<!-- <img id="incubeeDisplayImage" src="/app/img/one_light.jpg"> -->
+			<div id="incubeeHeaderDiv">
+				<font size="4.5">{{customers.company_name}}</font>
+				<label>★★★★★</label>
+				<button class="btn" id="likeButton" >Like</button></br>
+				<font size="2.5">{{customers.founder}}</font>
+				
+			</div>
+			<div id="incubeeDetailsDiv">
+
+					<label>{{customers.description}}</label><br/>
+			</div>
+		</div>
+	</ul>
+</div>
+
+
+<!-- inject:js -->
+<script src="/app/app.js"></script>
+<script src="/app/investor.controller.js"></script>
+<script src="/app/investor.service.js"></script>
+<!-- endinject -->
+</body>
+</html>

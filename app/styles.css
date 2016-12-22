@@ -1,0 +1,39 @@
+#incubeeDisplayDiv {
+	margin: 2em;
+	height: 100%;
+	max-width: 100%;
+	background-image: url('/app/img/one_light.jpg');
+	background-repeat: no-repeat;
+  	/*background-attachment: fixed;*/
+  	background-size: 100%;
+  	border: 1px solid #ccc;
+  	border-radius: 0.75em;
+	padding: 0em !important;
+}
+
+#incubeeHeaderDiv {
+	background: -webkit-linear-gradient(transparent, black);
+	position: relative;
+	margin-top: 12em;
+	height: 20%;
+	max-width: 100%;
+	min-width: 100%;
+	color: white;
+	margin-left: 0px;
+}
+
+#incubeeDetailsDiv {
+	position: relative;
+	background-color: black;
+	color: #ccc;
+	border-bottom-right-radius: 0.75em;
+	border-bottom-left-radius: 0.75em;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+#likeButton {
+	background-color: transparent;
+	color: red;
+
+}
