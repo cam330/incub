@@ -12,57 +12,43 @@
         var vm = this;
         vm.title = 'InvestorController';
         vm.customersArray = [];
-        vm.likesArray = [];
+        vm.reviewsArray = [];
 
         activate();
 
         ////////////////
 
         function activate() {
-        	// InvestorService.getAllIncubees().then(function(response){
-        	// 	console.log(response.data);
-
-        	// 	for(var i = 0; i < response.data.length; i++){
-        	// 		if (vm.likesArray.indexOf(response.data[i].id)) {
-        	// 			console.log(response.data[i].company_name);
-        	// 			vm.customersArray.push(response.data[i]);
-        	// 		}
-        	// 	}
-        	// })
 
         	InvestorService.getAllUserLikes().then(function(response){
-        		
-        		// vm.likesArray = response.data.incubeeList;
-        		// console.log(vm.likesArray);
-        		console.log(response);
+
         		for(var i = 0; i < response.data.incubeeList.length; i++){
         			InvestorService.getIncubeeById(response.data.incubeeList[i]).then(function(incubeeResponse){
-        				if (incubeeResponse.data !== "") {
-        					vm.customersArray.push(incubeeResponse);
+
+        				if (incubeeResponse[0].data !== "") {
+        					if (incubeeResponse[1].data.reviewData != null) {
+        						vm.customersArray.push({incubeeDetails: incubeeResponse[0], averageRating: incubeeResponse[1].data.reviewData.averageRating, numberOfRatings: incubeeResponse[1].data.reviewData.noOfRatings});
+        					} else {
+        						vm.customersArray.push({incubeeDetails: incubeeResponse[0], averageRating: 0, numberOfRatings: 0});
+        					}
         				}
         			});
+
         		}
         	})
-
-
-
         }
 
-        vm.loadNewFilter = function(){
-        	vm.filter 
-        }
+        vm.getReviews = function(incubeeId){
+        	vm.reviewsArray = [];
+        	InvestorService.getReviews(incubeeId).then(function(reviews){
+        		for(var i = 0; i < reviews.data.reviews.length; i++){
 
-        vm.getCustomers = function(){
-        	InvestorService.getCustomers().then(function(response){
-        		console.log(response.data);
+        			var date = new Date(reviews.data.reviews[i].date);
+					var formattedDate = date.getMonth()+1+'/' + date.getDate() +'/'+date.getFullYear();
+
+					vm.reviewsArray.push({rating: reviews.data.reviews[i].rating, title: reviews.data.reviews[i].title, description: reviews.data.reviews[i].description, userId: reviews.data.reviews[i].user_id, date: formattedDate});
+        		}
         	});
         }
-
-        vm.getAllIncubees = function(){
-        	InvestorService.getAllIncubees().then(function(response){
-        		console.log(response.data);
-        	})
-        }
-
     }
 })();
