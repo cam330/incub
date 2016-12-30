@@ -55,8 +55,26 @@
         			id: '110489314263267697974'
         		}
         	}).then(function(response){
+        		return response; 
+        	});
+        }
+
+        this.getIncubeeById = function(incubeeId){
+
+        	var URL = "http://www.incub.ee/rest/v1.0/" + incubeeId;
+
+        	return $http({
+        		method: 'GET',
+        		url: URL
+        	}).then(function(response){
         		return response;
         	});
         }
     }
 })();
+
+
+
+
+
+
